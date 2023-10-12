@@ -206,4 +206,64 @@ cv2.waitKey()
 
 ![alt text](ROT.png)
 
-# NIGGER 
+# OPENCAM
+
+```python
+import cv2
+#A function from Opencv that opens camera of your machine 
+#(0) means camera 1, type (1) if you want to use second camera available in your machine
+cap = cv2.VideoCapture(0)
+#Checks if the webcam is opened correctly
+if not cap.isOpened():
+    raise IOError("Cannot open webcam")
+
+#A continous loop for checking each frame from the camera feed.
+while True:
+#Here, ret is a Boolean value returned by the read function, and it indicates whether or not
+#the frame was captured successfully. If the frame is captured correctly, it’s stored in the
+#variable frame.
+    ret, frame = cap.read()
+#Let's say I want to resize the frame of our camera feed, heres the next line for that.
+    frame = cv2.resize(frame, None, fx=1, fy=1,interpolation=cv2.INTER_AREA)
+#interpolation=cv2.INTER_AREA is an argument we use in resize function to produce sharper and cleaner results when downscaling, 
+# making it suitable for tasks where image quality is important.   
+    
+#Part where we show the camera feed.    
+    cv2.imshow('Taken Image', frame)
+    c = cv2.waitKey(1)
+#A condition for breaking the loop, closing windows, and saving the last frame captured after typing
+    if c == 27: # this is "esc" key
+        cv2.destroyAllWindows()
+        filename = input("Enter filename for photo taken:")
+        cv2.imwrite(f"{filename}.png",frame)
+        break
+#Closes the capture function
+cap.release()
+
+```
+# warpAffine
+
+>OpenCV's warpAffine function is used for performing affine transformations on images. An affine transformation is a linear mapping that preserves points, straight lines, and ratios of distances between points. This can be used for tasks like translation, rotation, scaling, and shearing of images.
+
+```python
+import cv2
+import numpy as np
+
+# Load an image
+image = cv2.imread('sample_image.jpg')
+
+# Define the translation matrix
+# Translation by (tx, ty) where tx and ty are the pixel offsets
+tx = 50  # Translate 50 pixels to the right
+ty = 30  # Translate 30 pixels down
+translation_matrix = np.float32([[1, 0, tx], [0, 1, ty]])
+
+# Apply the translation using warpAffine
+translated_image = cv2.warpAffine(image, translation_matrix, (image.shape[1], image.shape[0]))
+
+# Display the original and translated images
+cv2.imshow('Original Image', image)
+cv2.imshow('Translated Image', translated_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
