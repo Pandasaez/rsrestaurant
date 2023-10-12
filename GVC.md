@@ -86,7 +86,7 @@ image being displayed in a new window.
 
 
 GRAYSCALE
-'''python
+’’’python
 gray_img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
 YUV
@@ -101,7 +101,7 @@ cv2.imshow('V channel', yuv_img[:, :, 2])
 
 cv2.waitKey()
 
-'''
+’’’
 HSV
 
 hsv_img = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
