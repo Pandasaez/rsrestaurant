@@ -3,7 +3,7 @@
 ### ***Common  Uses for 3D Graphics*** ###
 
 * Real time 3D - Military flight simulators
-* Computer Aided Dedsign
+* Computer Aided Design
 * Architectural of civil Planning
 * Medical Imaging
 * Scientific Visualation
