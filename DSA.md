@@ -593,3 +593,211 @@ int factorial(int n) {
   else return n * factorial(n-1);
 }
 ```
+# Insertion Sort
+ ## Example Code for Insertiojn Sort\
+ 
+ ```csharp
+ using System;
+using System.ComponentModel;
+
+// Namespace declaration.
+namespace ConsoleApp2
+{
+    // Main program class.
+    class Program
+    {
+        // Main method.
+        static void Main(string[] args)
+        {
+            // Creating an instance of cCollection with a capacity of 20.
+            cCollection number = new cCollection(20);
+            Random rdm = new Random();
+
+            // Inserting random numbers into the collection.
+            for (int i = 0; i <= number.Length; i++)
+                number.Insert(rdm.Next(10, 90));
+
+            // Displaying the unsorted collection.
+            Console.WriteLine("UNSORTED");
+            number.Display();
+
+            // Sorting the collection using the Insertion Sort algorithm.
+            Console.WriteLine();
+            Console.WriteLine("SORTED");
+            number.InsertionSort();
+            number.Display();
+
+            // Pausing the console to view the output.
+            Console.ReadLine();
+        }
+    }
+
+    // Custom collection class.
+    class cCollection
+    {
+        private int[] num; // Array to hold the collection.
+        private int upperLimit; // Upper limit of the collection.
+        private int activeIndex; // Current active index for insertion.
+
+        // Constructor to initialize the collection with a specific size.
+        public cCollection(int size)
+        {
+            num = new int[size];
+            activeIndex = 0;
+            upperLimit = size - 1;
+        }
+
+        // Method to insert an item into the collection.
+        public void Insert(int item)
+        {
+            num[activeIndex] = item;
+            activeIndex++;
+        }
+
+        // Method to display the elements of the collection.
+        public void Display()
+        {
+            for (int i = 0; i <= upperLimit; i++)
+                Console.Write($"{num[i]} ");
+        }
+
+        // Method to clear the collection.
+        public void Clear()
+        {
+            for (int i = 0; i <= upperLimit; i++)
+                num[i] = 0;
+            activeIndex = 0;
+        }
+
+        // Property to get the length of the collection.
+        public int Length
+        {
+            get { return upperLimit; }
+        }
+
+        // Method to perform Insertion Sort on the collection.
+        public void InsertionSort()
+        {
+            for (int i = 1; i <= upperLimit; i++)
+            {
+                int j = i;
+                while(j > 0 && num[j-1] > num[j])
+                {
+                    // Swapping elements during the sorting process.
+                    int temp = num[j - 1];
+                    num[j - 1] = num[j];
+                    num[j] = temp;
+                    j--;
+                }
+            }
+        }
+    }
+}
+```
+>Output:
+
+UNSORTED
+
+38 51 19 18 68 22 27 87 28 83 34 48 88 58 27 89 79 53 39 51
+
+SORTED
+
+18 19 22 27 27 28 34 38 39 48 51 51 53 58 68 79 83 87 88 89
+# Selection Sorting
+## Selection Sorting Sample code
+```csharp
+using System;
+using System.ComponentModel;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Creating an instance of cCollection with an upper limit of 20
+            cCollection my_num = new cCollection(20);
+            Random rdm = new Random();
+
+            // Inserting random numbers between 10 and 90 into the collection
+            for (int i = 0; i <= my_num.Length; i++)
+                my_num.InsertItem(rdm.Next(10, 90));
+
+            // Printing the original, unsorted list
+            Console.WriteLine("UNSORTED");
+            my_num.DisplayItems();
+
+            Console.WriteLine();
+
+            // Sorting the list using the Selection Sort algorithm
+            Console.WriteLine("SORTED");
+            my_num.SelectionSort();
+            my_num.DisplayItems();
+            Console.ReadLine();
+        }
+    }
+    
+    // A class representing a collection of integers
+    class cCollection
+    {
+        private int[] num; // An array to store the numbers
+        private int activeIndex; // Represents the current index of the array where an item will be inserted
+        private int upperLimit; // Represents the upper limit of the array
+
+        // Constructor to initialize the collection with a specific size
+        public cCollection(int size)
+        {
+            num = new int[size];
+            activeIndex = 0;
+            upperLimit = size - 1;
+        }
+
+        // Method to insert an item into the collection
+        public void InsertItem(int item)
+        {
+            num[activeIndex] = item;
+            activeIndex++;
+        }
+
+        // Method to display all the items in the collection
+        public void DisplayItems()
+        {
+            for (int i = 0; i <= upperLimit; i++)
+                Console.Write($"{num[i]} ");
+        }
+
+        // Property to get the length of the collection
+        public int Length
+        {
+            get { return upperLimit; }
+        }
+
+        // Method to sort the collection using the Selection Sort algorithm
+        public void SelectionSort()
+        {
+            for (int i = 0; i <= upperLimit; i++)
+            {
+                int ln = i; // ln is the index of the smallest value in the current iteration
+                for (int j = i + 1; j <= upperLimit; j++)
+                {
+                    if (num[j] < num[ln]) ln = j; // Finding the index of the smallest value in the remaining unsorted array
+                }
+                // Swapping the values at position ln and i
+                int temp = num[ln];
+                num[ln] = num[i];
+                num[i] = temp;
+            }
+        }
+    }
+}
+
+```
+>Output:
+
+UNSORTED
+
+73 74 37 58 32 64 74 54 75 76 76 75 32 21 50 89 44 78 40 13
+
+SORTED
+
+73 74 37 58 37 64 74 54 75 76 76 75 76 76 75 89 76 78 78 89
